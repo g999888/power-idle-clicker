@@ -187,6 +187,7 @@ window.onmousedown = function(e)
 							// console.log("mouseJ :"+mouseJ);
 							if (buildings.length >= mouseJ)
 							{
+								//for (var i=0; i< 25; i++)
 								buildings[mouseJ-1].buy();
 							}
 						}
@@ -249,6 +250,7 @@ Power.prototype =
 			this.count ++;
 			this.costs = this.getcosts();
 			this.currenttimer = this.gettimer();
+			if (this.currenttimer <= 257) this.currenttimer = 257;
 			this.output = this.getoutput();
 		}
 	},
@@ -388,7 +390,7 @@ Game.launch = function(canvasId)
 	people.push (new Fly(people[0]));
 	people.push (new Fly(people[0]));
 	
-	money = 4;
+	money = 1000000000004;
 	buildings = [ Power1, Power2, Power3, Power4, Power5, Power6, Power7, Power8  ];
 	//buildings[0].buy();
 	
@@ -593,6 +595,9 @@ Game.launch = function(canvasId)
 				text = "Output: $" + buildings[i].output;
 				screen.fillText(text, Buttons[i].x + 64 + 20, Buttons[i].y + 45);
 				
+				if (buildings[i].currenttimer <= 257)
+				text = "Timer: -oOo-";
+				else
 				text = "Timer: " + (buildings[i].currenttimer -buildings[i].timer)/(256*100);
 				screen.fillText(text, Buttons[i].x + 64 + 20, Buttons[i].y + 60);
 			}
