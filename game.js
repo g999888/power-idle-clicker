@@ -186,7 +186,9 @@ window.onmousedown = function(e)
 						{
 							// console.log("mouseJ :"+mouseJ);
 							if (buildings.length >= mouseJ)
-							buildings[mouseJ-1].buy();
+							{
+								buildings[mouseJ-1].buy();
+							}
 						}
 					}
 					mouseP = e.buttons;
@@ -217,6 +219,7 @@ var Power = function()
 	this.timerbonus = 1;
 	this.costs = this.startcosts;
 	this.timer = 0;
+	this.currenttimer = this.starttimer;
 	this.price_increase_factor = 1.05;
 }
 
@@ -245,7 +248,7 @@ Power.prototype =
 			money -= this.getcosts();
 			this.count ++;
 			this.costs = this.getcosts();
-			this.starttimer = this.gettimer();
+			this.currenttimer = this.gettimer();
 			this.output = this.getoutput();
 		}
 	},
@@ -255,9 +258,9 @@ Power.prototype =
 		if (this.count > 0)
 		{
 			this.timer += 256;
-			if (this.timer >= this.starttimer)
+			if (this.timer >= this.currenttimer)
 			{
-				this.timer -= this.starttimer;
+				this.timer -= this.currenttimer;
 				money += this.output;
 			}
 		}
@@ -273,6 +276,7 @@ var Power1 = new Power();
 	Power1.unitoutput = 1;
 	Power1.costs = Power1.startcosts;
 	Power1.price_increase_factor = 1.07;
+	Power1.currenttimer = Power1.starttimer;
 }
 
 var Power2 = new Power();
@@ -284,6 +288,7 @@ var Power2 = new Power();
 	Power2.unitoutput = 60;
 	Power2.costs = Power2.startcosts;
 	Power2.price_increase_factor = 1.15;
+	Power2.currenttimer = Power2.starttimer;
 }
 
 var Power3 = new Power()
@@ -295,6 +300,7 @@ var Power3 = new Power()
 	Power3.unitoutput = 540;
 	Power3.costs = Power3.startcosts;
 	Power3.price_increase_factor = 1.14;
+	Power3.currenttimer = Power3.starttimer;
 }
 
 var Power4 = new Power()
@@ -306,6 +312,7 @@ var Power4 = new Power()
 	Power4.unitoutput = 4320;
 	Power4.costs = Power4.startcosts;
 	Power4.price_increase_factor = 1.13;
+	Power4.currenttimer = Power4.starttimer;
 }
 
 var Power5 = new Power()
@@ -317,6 +324,7 @@ var Power5 = new Power()
 	Power5.unitoutput = 51840;
 	Power5.costs = Power5.startcosts;
 	Power5.price_increase_factor = 1.12;
+	Power5.currenttimer = Power5.starttimer;
 }
 
 var Power6 = new Power()
@@ -328,6 +336,7 @@ var Power6 = new Power()
 	Power6.unitoutput = 622080;
 	Power6.costs = Power6.startcosts;
 	Power6.price_increase_factor = 1.10;
+	Power6.currenttimer = Power6.starttimer;
 }
 
 var Power7 = new Power()
@@ -339,6 +348,7 @@ var Power7 = new Power()
 	Power7.unitoutput = 7465000;
 	Power7.costs = Power7.startcosts;
 	Power7.price_increase_factor = 1.07;
+	Power7.currenttimer = Power7.starttimer;
 }
 
 var Power8 = new Power()
@@ -350,6 +360,7 @@ var Power8 = new Power()
 	Power8.unitoutput = 89580000;
 	Power8.costs = Power8.startcosts;
 	Power8.price_increase_factor = 1.05;
+	Power8.currenttimer = Power8.starttimer;
 }
 
 
@@ -582,7 +593,7 @@ Game.launch = function(canvasId)
 				text = "Output: $" + buildings[i].output;
 				screen.fillText(text, Buttons[i].x + 64 + 20, Buttons[i].y + 45);
 				
-				text = "Timer: " + (buildings[i].starttimer -buildings[i].timer)/(256*100);
+				text = "Timer: " + (buildings[i].currenttimer -buildings[i].timer)/(256*100);
 				screen.fillText(text, Buttons[i].x + 64 + 20, Buttons[i].y + 60);
 			}
 			
