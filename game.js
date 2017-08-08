@@ -390,7 +390,7 @@ Game.launch = function(canvasId)
 	people.push (new Fly(people[0]));
 	people.push (new Fly(people[0]));
 	
-	money = 1000000000004;
+	money = 4;
 	buildings = [ Power1, Power2, Power3, Power4, Power5, Power6, Power7, Power8  ];
 	//buildings[0].buy();
 	
